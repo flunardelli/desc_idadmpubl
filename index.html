@@ -2,27 +2,66 @@
 <html>
 <head>
     <title>Omniciente</title>
-    <link rel="stylesheet" type="text/css" href="sheet.css">
+    <!-- link rel="stylesheet" type="text/css" href="sheet.css" -->
     <meta charset="utf-8">
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <!-- jQuery library -->
+    <!-- Popper JS -->
+    <!-- Latest compiled JavaScript -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
+
 <body>
-    <div class="supBar">
-        <a href="barraBanco.html" target="secBarIframe" class="links">Banco</a>
-        <a href="barraIndice.html" target="secBarIframe" class="links">Índice</a>
-    </div>
-
-    <div class="secBar">
-		<iframe src=./inicio.html" class="secBar" name="secBarIframe"></iframe>
-    </div>
-
-    <div class="areaSite">
-        <iframe src="./inicio.html" class="areasite" name="areaSite" width="50%"></iframe>
+    <div class="container-fluid bg-dark" id="primBar"> </div>
+    <div class="container-fluid bg-dark" id="secBar"> </div>
+    <div class="container">
+        <p id="canvasContent">Bem vindo ao Omnisciente (HTML)</p>
     </div>
 
 <script>
-    //document.getElementById("secBarIframe").innerHTML = '<a href="inicio.html" target="areaSite" class="links">Limpar</a>'
-</script>
 
+	/*   estrutura hierárquica do menu. A princípio deve ter dois níveis,
+		 mas é bom contar com a possibilidade de aumentar. O usuário é
+		 exigente e não sabe receber um "é difícil" como resposta. */
+    var menu = {
+        "Banco":{
+            "Limpar":"cleanDB", 
+            "Inserir Fatos":"factInsert"
+		},
+        "Índice":{
+            "Calcular":"indexCalc"
+		}
+	}
+
+	function priLoad(){
+		links = ''
+		for (var mmenu in menu){
+			links += '\n' + '<a href="#" class="primary-link" onclick="secReload(\'' + mmenu + '\')">' + mmenu + '</a>'
+		}
+		document.getElementById("primBar").innerHTML=links
+	}
+
+    function secReload(index){
+		links = ''
+		for (var ind in menu[index]){
+			links = links + '\n' + '<a href="#" class="primary-link">' + ind + '</a>'
+		}
+		document.getElementById("secBar").innerHTML=links
+		document.getElementById("canvasContent").innerHTML="Estou editando pela functionJS."
+    }
+
+    document.getElementById("canvasContent").innerHTML="Estou editando pelo JS."
+	//secReload("Banco")
+	priLoad()
+
+</script>
 </body>
 </html>
 
